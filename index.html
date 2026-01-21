@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Valentine's Day Card</title>
+  <style>
+    body {
+      font-family: 'Comic Sans MS', cursive;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    /* Floating hearts */
+    .heart {
+      position: absolute;
+      color: #e63946;
+      font-size: 20px;
+      animation: float 6s linear infinite;
+      opacity: 0.7;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(100vh) scale(0.8); }
+      100% { transform: translateY(-10vh) scale(1.2); }
+    }
+
+    .card {
+      background: white;
+      padding: 40px;
+      border-radius: 25px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+      max-width: 420px;
+      animation: pop 1s ease;
+      position: relative;
+      z-index: 10;
+    }
+
+    @keyframes pop {
+      0% { transform: scale(0.5); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    h1 { color: #e63946; }
+    p { font-size: 20px; }
+
+    .buttons {
+      margin-top: 30px;
+      position: relative;
+      height: 120px;
+    }
+
+    a {
+      text-decoration: none;
+      padding: 14px 30px;
+      border-radius: 30px;
+      font-size: 20px;
+      color: white;
+      display: inline-block;
+      transition: all 0.3s ease;
+      position: absolute;
+      cursor: pointer;
+    }
+
+    .yes {
+      background: #e63946;
+      left: 30px;
+      bottom: 10px;
+    }
+
+    .yes:hover {
+      transform: scale(1.15);
+      box-shadow: 0 0 15px #e63946;
+    }
+
+    .no {
+      background: #6c757d;
+      right: 30px;
+      bottom: 10px;
+    }
+
+    .message {
+      margin-top: 15px;
+      font-size: 16px;
+      color: #555;
+      height: 20px;
+    }
+  </style>
+  <audio id="bgMusic" loop>
+    <source src="blue.mp3" type="audio/mpeg">
+  </audio>
+</head>
+<body>
+
+  <!-- Floating hearts -->
+  <script>
+    for (let i = 0; i < 20; i++) {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.innerHTML = '❤';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = 4 + Math.random() * 4 + 's';
+      document.body.appendChild(heart);
+    }
+  </script>
+
+  <div class="card">
+    <h1>💖 Hey katla pamu 💖</h1>
+    <p id="question">Will you be my Valentine, mi amore? 🌹</p>
+
+    <div class="buttons">
+      <a href="yes.html" class="yes">Yes 💕</a>
+      <a href="#" class="no" id="noBtn">No 💔</a>
+    </div>
+
+    <div class="message" id="msg"></div>
+  </div>
+
+    <script>
+    const bgMusic = document.getElementById('bgMusic');
+    let musicStarted = false;
+
+    // Start music on first user interaction (browser-friendly)
+    document.addEventListener('click', () => {
+      if (!musicStarted) {
+        bgMusic.volume = 0.6;
+        bgMusic.play().catch(() => {});
+        musicStarted = true;
+      }
+    });
+
+    const noBtn = document.getElementById('noBtn');
+    const msg = document.getElementById('msg');
+
+    const messages = [
+      'Are you sure? 🥺',
+      'Think again… 😢',
+      'My heart is fragile 💔',
+      'Don’t do this to me 😭',
+      'Okay this button is broken 🙈'
+    ];
+
+    let count = 0;
+
+    noBtn.addEventListener('mouseover', () => {
+      const x = Math.random() * 260;
+      const y = Math.random() * 80;
+      noBtn.style.left = x + 'px';
+      noBtn.style.bottom = y + 'px';
+      msg.textContent = messages[count % messages.length];
+      count++;
+    });
+  </script>
+
+</body>
+</html>
