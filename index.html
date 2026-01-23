@@ -4,6 +4,37 @@
   <meta charset="UTF-8" />
   <title>Valentine's Day Card</title>
   <style>
+  .hug {
+  width: 220px;
+  border-radius: 20px;
+  margin-top: 20px;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all 1.5s ease;
+  box-shadow: 0 0 25px rgba(255,182,193,0.9);
+}
+
+.hug.show {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.firework {
+  position: fixed;
+  width: 6px;
+  height: 6px;
+  background: pink;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: explode 1s ease-out forwards;
+}
+
+@keyframes explode {
+  to {
+    transform: translate(var(--x), var(--y)) scale(0);
+    opacity: 0;
+  }
+}
     body {
       font-family: 'Comic Sans MS', cursive;
       background: linear-gradient(135deg, #ff9a9e, #fad0c4);
@@ -30,6 +61,7 @@
     }
 
     .card {
+      <img src="hug.jpg" class="hug" id="hugImg">
       background: white;
       padding: 40px;
       border-radius: 25px;
